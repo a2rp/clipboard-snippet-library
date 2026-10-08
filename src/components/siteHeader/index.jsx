@@ -9,8 +9,8 @@ const SiteHeader = () => (
         <span>Snippet <b>Shelf</b></span>
       </a>
       <nav className={styles.navigation} aria-label="Main navigation">
-        <a href="#library">Generator</a>
-        <a href="#guide">About UUIDs</a>
+        <a href="#library">Snippets</a>
+        <a href="#guide">How to use</a>
       </nav>
       <a className={styles.repository} href="https://github.com/a2rp/clipboard-snippet-library" target="_blank" rel="noreferrer">
         <FiGithub aria-hidden="true" /> <span>Repository</span>
