@@ -15,6 +15,7 @@ Snippet Shelf keeps small pieces of text you reuse in one searchable browser lib
 - Pin useful snippets so they stay near the top of the recent list.
 - Copy an entire snippet with one button.
 - Delete an item after reviewing a confirmation that names the snippet.
+- Press `/` to focus search; press Escape to close an open dialog.
 - Use the responsive library on desktop and mobile.
 
 ## Saving and privacy
@@ -51,7 +52,7 @@ npm run deploy
 These are ideas for later versions and are not implemented yet:
 
 - Add import and export for portable library backups.
-- Add tags and a keyboard shortcut for opening the new-snippet editor.
+- Add tags to snippets for more flexible organization.
 - Add optional browser sync across devices.
 
 ## Links

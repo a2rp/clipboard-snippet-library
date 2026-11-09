@@ -1,4 +1,4 @@
-﻿import { useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useRef, useState } from "react";
 import { FiPlus, FiSearch, FiSliders } from "react-icons/fi";
 import BackToTop from "./components/backToTop/index.jsx";
 import DeleteSnippetConfirm from "./components/deleteSnippetConfirm/index.jsx";
@@ -31,9 +31,31 @@ const App = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [pendingDelete, setPendingDelete] = useState(null);
   const [notice, setNotice] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(() => {
+    try {
+      localStorage.getItem(storageKey);
+      return "";
+    } catch {
+      return "Browser storage is unavailable. Your changes will be lost when you leave this tab.";
+    }
+  });
+  const searchInputRef = useRef(null);
   const categories = useMemo(() => getSnippetCategories(snippets), [snippets]);
   const visibleSnippets = useMemo(() => filterSnippets(snippets, activeCategory, query, sort), [snippets, activeCategory, query, sort]);
+
+  useEffect(() => {
+    const handleSearchShortcut = (event) => {
+      const target = event.target;
+      const isTyping = target instanceof HTMLElement
+        && (target.isContentEditable || target.matches("input, textarea, select, [role='textbox']"));
+      if (event.key !== "/" || event.altKey || event.ctrlKey || event.metaKey || event.isComposing || isTyping || document.querySelector('[aria-modal="true"]')) return;
+      event.preventDefault();
+      searchInputRef.current?.focus();
+    };
+
+    window.addEventListener("keydown", handleSearchShortcut);
+    return () => window.removeEventListener("keydown", handleSearchShortcut);
+  }, []);
 
   const storeSnippets = (nextSnippets) => {
     setSnippets(nextSnippets);
@@ -113,7 +135,7 @@ const App = () => {
           <div className={styles.collection}>
             <div className={styles.collectionHeading}><div><p className={styles.sectionLabel}>{activeCategory === allSnippetsCategory ? "THE COLLECTION" : "CATEGORY"}</p><h2 id="library-title">{activeCategory}</h2><span>{visibleSnippets.length} {visibleSnippets.length === 1 ? "snippet" : "snippets"}{query && ` matching “${query}”`}</span></div><button className={styles.mobileAdd} type="button" onClick={openNewSnippet}><FiPlus aria-hidden="true" /> Add</button></div>
             <div className={styles.toolbar}>
-              <label className={styles.searchBox} htmlFor="snippet-search"><FiSearch aria-hidden="true" /><input id="snippet-search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search titles, text, categories..." /><kbd>/</kbd></label>
+              <label className={styles.searchBox} htmlFor="snippet-search"><FiSearch aria-hidden="true" /><input ref={searchInputRef} id="snippet-search" aria-label="Search snippets" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search titles, text, categories..." /><kbd aria-hidden="true">/</kbd></label>
               <label className={styles.sortBox} htmlFor="snippet-sort"><FiSliders aria-hidden="true" /><span>Sort</span><select id="snippet-sort" value={sort} onChange={(event) => setSort(event.target.value)}><option value="recent">Recent</option><option value="name">Name</option></select></label>
             </div>
             {error && <p className={styles.error} role="alert">{error}</p>}
