@@ -1,5 +1,5 @@
 ﻿import { useEffect, useMemo, useRef, useState } from "react";
-import { FiPlus, FiSearch, FiSliders } from "react-icons/fi";
+import { FiInfo, FiPlus, FiSearch, FiSliders } from "react-icons/fi";
 import BackToTop from "./components/backToTop/index.jsx";
 import DeleteSnippetConfirm from "./components/deleteSnippetConfirm/index.jsx";
 import SiteFooter from "./components/siteFooter/index.jsx";
@@ -147,7 +147,7 @@ const App = () => {
             ) : (
               <div className={styles.emptyState}><span>{query ? "⌕" : "＋"}</span><h3>{query ? "No snippets match that search" : "Your shelf is empty"}</h3><p>{query ? "Try another word or clear the search to see everything." : "Save your first command, code sample, or note for later."}</p>{query ? <button type="button" onClick={() => setQuery("")}>Clear search</button> : <button type="button" onClick={openNewSnippet}>Add your first snippet</button>}</div>
             )}
-            <p className={styles.collectionFoot}>Snippets are saved on this device. They are not synced between browsers.</p>
+            <p className={styles.privacyNote} role="note"><FiInfo aria-hidden="true" /> <span>Snippets stay in this browser and are not encrypted by the app. Don’t save passwords, API keys, or other secrets.</span></p>
           </div>
         </section>
         <section className={styles.guide} id="guide" aria-labelledby="guide-title">

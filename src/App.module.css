@@ -60,7 +60,8 @@
   .emptyState p { max-width: 320px; margin-top: 5px; color: var(--muted); font-size: 9px; line-height: 1.6; }
   .emptyState button { min-height: 32px; margin-top: 14px; padding: 0 10px; border: 1px solid var(--line-strong); border-radius: 7px; color: var(--ink); background: var(--paper); font-size: 9px; font-weight: 700; }
   .emptyState button:hover { border-color: var(--green); box-shadow: 0 0 0 2px rgb(71 114 116 / 9%); }
-  .collectionFoot { margin-top: 14px; color: var(--muted); font-size: 8px; }
+  .privacyNote { display: flex; align-items: flex-start; gap: 7px; margin-top: 14px; padding: 10px 12px; border: 1px solid #e6d4bd; border-radius: 8px; color: #675744; background: #f8f1e8; font-size: 9px; line-height: 1.55; }
+  .privacyNote svg { width: 13px; height: 13px; flex: 0 0 auto; margin-top: 1px; color: var(--accent-deep); }
 
   .guide { padding: 38px 24px 44px; border-top: 1px solid var(--line); background: #eee8df; scroll-margin-top: 76px; }
   .guideInner { display: grid; width: min(1120px, 100%); grid-template-columns: 1fr 0.8fr; align-items: center; gap: 52px; margin: 0 auto; }

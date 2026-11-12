@@ -20,7 +20,7 @@ Snippet Shelf keeps small pieces of text you reuse in one searchable browser lib
 
 ## Saving and privacy
 
-Snippets are stored in this browser's `localStorage` under `snippet-shelf-v1`. They remain after a page reload on the same browser and device. They are not sent to a server or synchronized to other browsers. Browser storage can be cleared in the browser settings. If storage is blocked, the current page still works and shows a message that changes will not persist after leaving the tab.
+Snippets are stored in this browser's `localStorage` under `snippet-shelf-v1`. They remain after a page reload on the same browser and device. They are not sent to a server or synchronized to other browsers, and the app does not encrypt them. Do not save passwords, API keys, or other secrets. Browser storage can be cleared in the browser settings. If storage is blocked, the current page still works and shows a message that changes will not persist after leaving the tab.
 
 Titles are limited to 72 characters, categories to 32 characters, and snippet text to 12,000 characters. Copy actions use the browser clipboard and may need permission.
 
